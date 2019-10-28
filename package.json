@@ -1,0 +1,22 @@
+{
+  "name": "notary-web-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "Kirill Maksimov <kirill@orbs.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "orbs-client-sdk": "^1.0.0",
+    "orbs-notary-lib": "https://github.com/orbs-network/orbs-notary-lib.git#master"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^6.2.2",
+    "supertest": "^4.0.2"
+  }
+}
