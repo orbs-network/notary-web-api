@@ -9,7 +9,7 @@ function s(f) {
 }
 
 describe("#register", () => {
-    it.only("happy flow", async () => {
+    it("happy flow", async () => {
         const request = supertest(app);
         const document = randomBytes(100);
         const { body } = await request
@@ -38,9 +38,8 @@ describe("#verify", () => {
 
         const { body } = await request
             .post("/api/verify")
-            .send({
-                hash: sha256(document)
-            });
+            .send(`hash=`+sha256(document))
+            .expect(200);
 
         expect(body.status).to.be.eql("OK");
         expect(body.response.hash).to.be.eql(sha256(document));
@@ -52,9 +51,8 @@ describe("#verify", () => {
 
         const { body } = await request
             .post("/api/verify")
-            .send({
-                hash: "some-hash"
-            });
+            .send(`hash=some-hash`)
+            .expect(200);
 
         expect(body.status).to.be.eql("OK");
         expect(body.response.hash).to.be.eql("some-hash");

@@ -1,15 +1,14 @@
 const Orbs = require("orbs-client-sdk");
-const { deploy, getContractCodeAsBuffer } = require("orbs-notary-lib/src/deploy");
+const { getContractCodeAsBuffer } = require("orbs-notary-lib/src/deploy");
+const { getClient, NotaryContractName } = require("./client");
 
-function getClient() {
-    return new Orbs.Client("http://localhost:8080", 42, Orbs.NetworkType.NETWORK_TYPE_TEST_NET);
+async function deploy(client, owner, code, contractName) {
+    const [tx, txid] = client.createTransaction(owner.publicKey, owner.privateKey, "_Deployments", "deployService", [Orbs.argString(contractName), Orbs.argUint32(1), Orbs.argBytes(code)])
+    return await client.sendTransaction(tx);
 }
 
-const owner = Orbs.createAccount();
-const notaryContractName = "Notary";
-
 (async () => {
-    await deploy(getClient(), owner, getContractCodeAsBuffer(), notaryContractName);
-
+    const owner = Orbs.createAccount();
+    await deploy(getClient(), owner, getContractCodeAsBuffer(), NotaryContractName);
     console.log("Success!");
 })();
