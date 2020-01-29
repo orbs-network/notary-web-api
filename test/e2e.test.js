@@ -1,12 +1,10 @@
+require("dotenv").config();
 const { app } = require("../index");
 const supertest = require("supertest");
 const expect = require("expect.js");
 const { randomBytes } = require("crypto");
 const { sha256 } = require("orbs-notary-lib");
 
-function s(f) {
-    return require("crypto").createHash('sha256').update(f, 'utf8').digest('hex')
-}
 
 describe("#register", () => {
     it("happy flow", async () => {
@@ -38,7 +36,7 @@ describe("#verify", () => {
 
         const { body } = await request
             .post("/api/verify")
-            .send(`hash=`+sha256(document))
+            .send(`hash=${sha256(document)}`)
             .expect(200);
 
         expect(body.status).to.be.eql("OK");
@@ -51,7 +49,7 @@ describe("#verify", () => {
 
         const { body } = await request
             .post("/api/verify")
-            .send(`hash=some-hash`)
+            .send("hash=some-hash")
             .expect(200);
 
         expect(body.status).to.be.eql("OK");

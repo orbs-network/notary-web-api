@@ -1,3 +1,4 @@
+require("dotenv").config();
 const Orbs = require("orbs-client-sdk");
 const { getContractCodeAsBuffer } = require("orbs-notary-lib/src/deploy");
 const { getClient, NotaryContractName } = require("./client");

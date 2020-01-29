@@ -11,12 +11,14 @@
   "author": "Kirill Maksimov <kirill@orbs.com>",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "orbs-client-sdk": "^1.4.0",
     "orbs-notary-lib": "git+https://github.com/orbs-network/orbs-notary-lib.git#master"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "expect.js": "^0.3.1",
     "mocha": "^6.2.2",
     "supertest": "^4.0.2"
