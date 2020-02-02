@@ -1,15 +1,15 @@
 const express = require("express");
-const Promise = require("bluebird");
+const any = require("promise.any");
 const bodyParser = require('body-parser');
 const { Notary } = require("orbs-notary-lib");
 const { createAccount } = require("orbs-client-sdk");
-const { NotaryContractName, getClients } = require("./client");
+const { NotaryContractName, getRandomClients } = require("./client");
 
 const port = process.env.PORT || 3000;
 
 const app = express();
 const account = createAccount();
-const notaryPool = getClients().map(notaryBuilder);
+const notaryPool = getRandomClients().map(notaryBuilder);
 
 app.use(bodyParser.raw());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,7 +21,7 @@ app.get("/", (_, res) => res.send({
 
 app.post("/api/register", async (req, res) => {
     try {
-        const [response] = await Promise.some(notaryPool.map(notary => notary.register(req.body, "")), 1);
+        const response = await any(notaryPool.map(notary => notary.register(req.body, "")));
         res.send({ status: "OK", response });
     } catch (e) {
         console.log(e)
@@ -35,7 +35,7 @@ app.post("/api/register", async (req, res) => {
 app.post("/api/verify", async (req, res) => {
     try {
         const { hash } = req.body;
-        const [response] = await Promise.some(notaryPool.map(notary => notary.verify(hash)), 1);
+        const response = await any(notaryPool.map(notary => notary.verify(hash)));
         res.send({ status: "OK", response });
     } catch (e) {
         res.status(500).send({
