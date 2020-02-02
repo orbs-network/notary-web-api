@@ -67,14 +67,8 @@ Takes string `hash` parameter (hex representation of sha256 hash of the file). R
 
 ```bash
 # start gamma-server
-
 gamma-cli start-local -env experimental
 
-# deploy the contract
-
-node setup.js
-
 # run tests
-
 npm test
 ```
