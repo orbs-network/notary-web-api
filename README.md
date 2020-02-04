@@ -8,6 +8,27 @@ All configuration happens via environment variables:
 
 * `API_ENDPOINT` - HTTP endpoint of Orbs virtual chain, defaults to `http://localhost:8080`
 * `VCHAIN` - Orbs virtual chain id, defaults to `42`
+* `ORBS_TOPOLOGY` - Orbs topology in JSON format
+
+<details><summary>How to get Orbs topology value?</summary>
+<p>
+
+See [.env](https://github.com/orbs-network/notary-web-api/blob/master/.env#L4) for a reference.
+### 1. Clone the repo
+```bash
+git clone https://github.com/orbs-network/kartoha
+cd kartoha
+npm install
+```
+
+### 2. Run the script that generates topology
+```bash
+node ./index.js topology --topology-contract-address 0x804c8336846d8206c95CEe24752D514210B5a240 --validator-registry-contract-address 0x56a6895fd37f358c17cbb3f14a864ea5fe871f0a --ethereum-endpoint http://eth.orbs.com > topology.json
+```
+### 3. Copy topology to the env variable
+
+</p>
+</details>
 
 ## API
 
