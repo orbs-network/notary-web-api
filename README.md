@@ -1,6 +1,6 @@
 # Orbs Notary web gateway
 
-This app provides a bridge between Notary contract running on Orbs blockchain and other services that want to take advantage of [Orbs Notary Library](https://github.com/orbs-network/notary-lib).
+This app provides a bridge between Notary contract running on Orbs blockchain and other services that want to take advantage of [Orbs Notary Library](https://github.com/orbs-network/orbs-notary-lib).
 
 ## Settings
 
